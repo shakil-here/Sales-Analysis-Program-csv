@@ -21,6 +21,7 @@ void readSalesData(char *filename, struct Transaction *transactions, int *num_tr
 
     char buffer[1024];
     fgets(buffer, sizeof(buffer), fp);
+    buffer[strcspn(buffer, "\r\n")] = 0;
 
     int i = 0;
     while (fgets(buffer, sizeof(buffer), fp))
@@ -76,7 +77,7 @@ float calculateTotalRevenue(struct Transaction *transactions, int num_transactio
 float calculateAverageRevenue(struct Transaction *transactions, int num_transactions)
 {
     float total_revenue = calculateTotalRevenue(transactions, num_transactions);
-    float average_revenue = total_revenue / num_transactions;
+    float average_revenue = total_revenue / (num_transactions);
     return average_revenue;
 }
 
